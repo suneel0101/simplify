@@ -1,0 +1,6 @@
+*.pyc
+venv/*
+active.py
+*/.sass-cache/*
+*.DS_Store
+*#*
