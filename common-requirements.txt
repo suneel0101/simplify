@@ -6,3 +6,4 @@ boto==2.2.2
 django-extensions==0.7.1
 dj-static==0.0.5
 requests==2.1.0
+twilio==3.5.4-rc1

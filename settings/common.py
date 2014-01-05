@@ -1,3 +1,5 @@
+import os
+
 # Django settings for your project.
 
 DEBUG = True
@@ -124,6 +126,8 @@ INSTALLED_APPS = (
     'south',
     'django_extensions',
     'util',
+    'wardrobe',
+    'meal',
     'simplify',
     'raven.contrib.django.raven_compat',
 )
@@ -160,3 +164,8 @@ LOGGING = {
 WSGI_APPLICATION = "wsgi.application"
 
 ALLOWED_HOSTS = ["*"]
+
+# Twilio credentials and from number
+TWILIO_ACCOUNT = os.environ.get("TWILIO_ACCOUNT")
+TWILIO_TOKEN = os.environ.get("TWILIO_TOKEN")
+TWILIO_FROM = os.environ.get("TWILIO_FROM")
