@@ -26,10 +26,10 @@ class Outfit(models.Model):
     shoes = models.ForeignKey('wardrobe.Shoes')
 
     def __unicode__(self):
-        return ",".join(
+        return ",".join([
             self.pants.name,
             self.shirt.name,
-            self.shoes.name)
+            self.shoes.name])
 
 
 class OutfitWear(models.Model):
