@@ -15,13 +15,19 @@ def generate_fresh_recommendation():
 def log_recommendation(restaurant):
     RestaurantVisit.objects.create(restaurant=restaurant)
 
-def send_recommendation(restaurant):
+def send_message(message):
     client = TwilioRestClient(
         settings.TWILIO_ACCOUNT,
         settings.TWILIO_TOKEN)
+
     for recipient in MealRecipient.objects.all():
         message = client.messages.create(to=recipient.phone,
                                          from_=settings.TWILIO_FROM,
-                                         body="Enjoy lunch today at {}! Details: {}".format(
-                                             restaurant.name,
-                                             restaurant.yelp_url))
+                                         body=message)
+
+
+def send_recommendation(restaurant):
+    message = "Enjoy lunch today at {}! Details: {}".format(
+        restaurant.name,
+        restaurant.yelp_url)
+    send_message(message)
