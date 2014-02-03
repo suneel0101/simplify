@@ -1,8 +1,9 @@
+import datetime
 import random
 from django.conf import settings
+from django.core.mail import send_mail
 from .models import RestaurantVisit, Restaurant, MealRecipient
 
-from twilio.rest import TwilioRestClient
 
 
 def generate_fresh_recommendation():
@@ -16,14 +17,10 @@ def log_recommendation(restaurant):
     RestaurantVisit.objects.create(restaurant=restaurant)
 
 def send_message(message):
-    client = TwilioRestClient(
-        settings.TWILIO_ACCOUNT,
-        settings.TWILIO_TOKEN)
-
-    for recipient in MealRecipient.objects.all():
-        message = client.messages.create(to=recipient.phone,
-                                         from_=settings.TWILIO_FROM,
-                                         body=message)
+    send_mail("Lunch rec for today: {}".format(datetime.datetime.today().strftime("%m %d %Y")),
+              message,
+              "SimplifyIt <simplifyit@pennypackerlabs.com",
+              ['xie1989@gmail.com', 'suneel0101@gmail.com'])
 
 
 def send_recommendation(restaurant):
